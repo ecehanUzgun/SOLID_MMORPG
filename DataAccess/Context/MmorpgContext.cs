@@ -10,6 +10,9 @@ namespace DataAccess.Context
 
         //Tablo
         public DbSet<Silah> Silahlar {  get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<Irk> Irklar { get; set; }
 
         //OnConfiguring
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
