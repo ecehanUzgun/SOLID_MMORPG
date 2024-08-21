@@ -1,0 +1,3 @@
+-Her bir ırkın zeka seviyesi farklı.
+-Karakterlerin eylemleri var -> Metot
+-Silahlar -> Hasar Oranı
