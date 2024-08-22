@@ -4,6 +4,7 @@ using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(MmorpgContext))]
-    partial class MmorpgContextModelSnapshot : ModelSnapshot
+    [Migration("20240822064710_initialData")]
+    partial class initialData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,18 +115,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("WeaponId");
 
                     b.ToTable("Players");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            CharacterId = 0,
-                            CreatedDate = new DateTime(2024, 8, 22, 12, 32, 8, 661, DateTimeKind.Local).AddTicks(8084),
-                            Level = 1,
-                            PlayerName = "ecehan",
-                            RaceId = 0,
-                            WeaponId = 0
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Race", b =>

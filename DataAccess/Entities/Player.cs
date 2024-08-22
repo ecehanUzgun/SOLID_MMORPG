@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Entities.Abstracts
+﻿namespace DataAccess.Entities
 {
     public class Player
     {
@@ -12,11 +12,11 @@
         public int Level { get; set; }
         public DateTime CreatedDate { get; set; }
         //Foreign Key
-        public int SilahId { get; set; }
-        public Silah Silah { get; set; }
-        public int CharacterId {  get; set; }
+        public int WeaponId { get; set; }
+        public Weapon Weapon { get; set; }
+        public int CharacterId { get; set; }
         public Character Character { get; set; }
-        public int IrkId { get; set; }
-        public Irk Irk { get; set; }
+        public int RaceId { get; set; }
+        public Race Race { get; set; }
     }
 }

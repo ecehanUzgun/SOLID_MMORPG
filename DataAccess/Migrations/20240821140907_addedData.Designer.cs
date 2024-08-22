@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(MmorpgContext))]
-    [Migration("20240821114923_initial")]
-    partial class initial
+    [Migration("20240821140907_addedData")]
+    partial class addedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,20 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DataAccess.Entities.Abstracts.Character", b =>
+            modelBuilder.Entity("DataAccess.Entities.Character", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("Health")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Skill")
                         .IsRequired()
@@ -42,26 +49,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Characters");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Abstracts.Irk", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("Energy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Intelligence")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Irklar");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.Abstracts.Player", b =>
+            modelBuilder.Entity("DataAccess.Entities.Player", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -99,7 +87,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Players");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Abstracts.Silah", b =>
+            modelBuilder.Entity("DataAccess.Entities.Race", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -107,29 +95,56 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("HasarOranı")
+                    b.Property<int>("Energy")
                         .HasColumnType("int");
+
+                    b.Property<int>("Intelligence")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Silahlar");
+                    b.ToTable("Races");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Abstracts.Player", b =>
+            modelBuilder.Entity("DataAccess.Entities.Weapon", b =>
                 {
-                    b.HasOne("DataAccess.Entities.Abstracts.Character", "Character")
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("Damage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Weapons");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.Player", b =>
+                {
+                    b.HasOne("DataAccess.Entities.Character", "Character")
                         .WithMany("Player")
                         .HasForeignKey("CharacterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DataAccess.Entities.Abstracts.Irk", "Irk")
+                    b.HasOne("DataAccess.Entities.Race", "Irk")
                         .WithMany("Player")
                         .HasForeignKey("IrkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DataAccess.Entities.Abstracts.Silah", "Silah")
+                    b.HasOne("DataAccess.Entities.Weapon", "Silah")
                         .WithMany("Player")
                         .HasForeignKey("SilahId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -142,17 +157,17 @@ namespace DataAccess.Migrations
                     b.Navigation("Silah");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Abstracts.Character", b =>
+            modelBuilder.Entity("DataAccess.Entities.Character", b =>
                 {
                     b.Navigation("Player");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Abstracts.Irk", b =>
+            modelBuilder.Entity("DataAccess.Entities.Race", b =>
                 {
                     b.Navigation("Player");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Abstracts.Silah", b =>
+            modelBuilder.Entity("DataAccess.Entities.Weapon", b =>
                 {
                     b.Navigation("Player");
                 });

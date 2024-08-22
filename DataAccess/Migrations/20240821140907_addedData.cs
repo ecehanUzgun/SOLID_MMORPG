@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class addedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,9 @@ namespace DataAccess.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Skill = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Skill = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Health = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,30 +27,32 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Irklar",
+                name: "Races",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Energy = table.Column<int>(type: "int", nullable: false),
                     Intelligence = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Irklar", x => x.ID);
+                    table.PrimaryKey("PK_Races", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Silahlar",
+                name: "Weapons",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HasarOranı = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Damage = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Silahlar", x => x.ID);
+                    table.PrimaryKey("PK_Weapons", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,15 +78,15 @@ namespace DataAccess.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Players_Irklar_IrkId",
+                        name: "FK_Players_Races_IrkId",
                         column: x => x.IrkId,
-                        principalTable: "Irklar",
+                        principalTable: "Races",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Players_Silahlar_SilahId",
+                        name: "FK_Players_Weapons_SilahId",
                         column: x => x.SilahId,
-                        principalTable: "Silahlar",
+                        principalTable: "Weapons",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -113,10 +117,10 @@ namespace DataAccess.Migrations
                 name: "Characters");
 
             migrationBuilder.DropTable(
-                name: "Irklar");
+                name: "Races");
 
             migrationBuilder.DropTable(
-                name: "Silahlar");
+                name: "Weapons");
         }
     }
 }
