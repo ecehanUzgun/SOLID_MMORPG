@@ -9,10 +9,6 @@ namespace Presentation
         {
             //TODO: Sırayla Player bilgilerini al.
 
-            //Player Name
-            //Console.WriteLine("Player Name:");
-            //string playerName = Console.ReadLine();
-
             //Choose Character
             Console.WriteLine("Choose Character\n");
             int userCharacter = 0;
@@ -75,7 +71,7 @@ namespace Presentation
                 newPlayer.RaceId = userRace;
                 newPlayer.WeaponId = userWeapon;
 
-                Console.WriteLine(playerService.SavePlayer(newPlayer));
+                Console.WriteLine(playerService.SavePlayer(newPlayer)); //Veritabanına kayıt
                 player = newPlayer;
             }
 
@@ -88,6 +84,7 @@ namespace Presentation
             Console.WriteLine($"Character Id:{player.CharacterId}");
 
             //player kullanarak ırk,silah,karakter adını yazdır.
+
         }
     }
 }
