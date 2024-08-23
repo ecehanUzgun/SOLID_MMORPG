@@ -4,12 +4,8 @@ using DataAccess.Repositories.Abstracts;
 
 namespace DataAccess.Repositories.Concretes
 {
-    public class CharacterRepository : CharacterBaseRepository
+    public class CharacterRepository : GenericRepository<Character>
     {
-        private readonly MmorpgContext db= new MmorpgContext();
-        public override List<Character> GetAllCharacters()
-        {
-            return db.Characters.ToList();
-        }
+
     }
 }

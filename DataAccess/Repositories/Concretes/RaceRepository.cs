@@ -3,11 +3,8 @@ using DataAccess.Repositories.Abstracts;
 
 namespace DataAccess.Repositories.Concretes
 {
-    public class RaceRepository : RaceBaseRepository
+    public class RaceRepository : GenericRepository<Race>
     {
-        public override List<Race> GetAllRaces()
-        {
-            throw new NotImplementedException();
-        }
+           
     }
 }
