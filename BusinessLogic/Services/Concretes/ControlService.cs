@@ -5,7 +5,7 @@ namespace BusinessLogic.Services.Concretes
 {
     public class ControlService<TEntity> : ControlBaseService<TEntity> where TEntity : class
     {
-        public override void ControlEntity(int userEntity, List<TEntity> entities)
+        public override void ControlEntity(ref int userEntity, List<TEntity> entities)
         {
             while (userEntity == 0)
             {

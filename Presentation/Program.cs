@@ -7,6 +7,12 @@ namespace Presentation
     {
         static void Main(string[] args)
         {
+            //TODO: Sırayla Player bilgilerini al.
+
+            //Player Name
+            //Console.WriteLine("Player Name:");
+            //string playerName = Console.ReadLine();
+
             //Choose Character
             Console.WriteLine("Choose Character\n");
             int userCharacter = 0;
@@ -17,7 +23,7 @@ namespace Presentation
             
             //Karakter seçimini kullanıcıdan al
             CharacterControl characterControl = new CharacterControl(); 
-            characterControl.ControlEntity(userCharacter,characters);
+            characterControl.ControlEntity(ref userCharacter,characters);
             //TODO:Id'si alının karakteri Player'a CharacterId olarak kayıt edilsin.
 
             //Choose Race
@@ -30,7 +36,7 @@ namespace Presentation
 
             //Kullanıcı Irk Seçimi
             RaceControl raceControl = new RaceControl();
-            raceControl.ControlEntity(userRace, races);
+            raceControl.ControlEntity(ref userRace, races);
 
             //Silah
             Console.WriteLine("Choose Weapon\n");
@@ -40,7 +46,48 @@ namespace Presentation
             //Silah Listele
             var weapons = weaponService.ListWeaponConsole();
 
+            //Kullanıcı Silah Seçimi
+            WeaponControl weaponControl = new WeaponControl();
+            weaponControl.ControlEntity(ref userWeapon, weapons);
 
-        }   
+            PlayerService playerService = new PlayerService();
+            int playerId = 0;
+
+            try
+            {
+                Console.WriteLine("Kullanıcı Id: ");
+                playerId = int.Parse(Console.ReadLine());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            Player player = playerService.GetPlayer(playerId);
+
+            if (player == null)
+            {
+                Player newPlayer = playerService.CreatePlayer();
+
+                Console.WriteLine("Player Name: ");
+                newPlayer.PlayerName = Console.ReadLine();
+                newPlayer.CharacterId = userCharacter;
+                newPlayer.RaceId = userRace;
+                newPlayer.WeaponId = userWeapon;
+
+                Console.WriteLine(playerService.SavePlayer(newPlayer));
+                player = newPlayer;
+            }
+
+            //Oyun Başlayacak
+            Console.WriteLine("***Oyuncu Bilgileri***");
+            Console.WriteLine($"Oyuncu Ad:{player.PlayerName}");
+            Console.WriteLine($"Oyuncu Seviye:{player.Level}");
+            Console.WriteLine($"Irk Id:{player.RaceId}");
+            Console.WriteLine($"Silah Id:{player.WeaponId}");
+            Console.WriteLine($"Character Id:{player.CharacterId}");
+
+            //player kullanarak ırk,silah,karakter adını yazdır.
+        }
     }
 }

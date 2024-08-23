@@ -2,6 +2,6 @@
 {
     public abstract class ControlBaseService<TEntity>
     {
-        public abstract void ControlEntity(int userEntity, List<TEntity> entities);
+        public abstract void ControlEntity(ref int userEntity, List<TEntity> entities);
     }
 }
