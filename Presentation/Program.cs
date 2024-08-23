@@ -85,6 +85,11 @@ namespace Presentation
 
             //player kullanarak ırk,silah,karakter adını yazdır.
 
+            //İki adet oyuncu oluştur.
+
+            //Bu oyuncuları karşılaştır.
+
+            //Static olarak güç tanımlaması yap.
         }
     }
 }
