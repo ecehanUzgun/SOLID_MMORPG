@@ -3,5 +3,6 @@
     public abstract class GenericBaseService<TEntity>
     {
         public abstract List<TEntity> ListEntity();
+        
     }
 }

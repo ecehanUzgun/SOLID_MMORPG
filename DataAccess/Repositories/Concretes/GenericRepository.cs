@@ -1,8 +1,6 @@
 ﻿using DataAccess.Context;
-using DataAccess.Entities;
 using DataAccess.Repositories.Abstracts;
 using Microsoft.EntityFrameworkCore;
-using System.Formats.Tar;
 
 namespace DataAccess.Repositories.Concretes
 {
